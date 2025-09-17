@@ -1,0 +1,21 @@
+### OS 通用
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.swp
+*.swo
+*~
+.nfs*
+
+### JetBrains / WebStorm
+.idea/
+*.iml
+
+### 临时/缓存/输出
+dist/
+build/
+out/
+tmp/
+.temp/
+.cache/

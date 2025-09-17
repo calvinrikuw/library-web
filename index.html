@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业共享书店</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="app-container">
+    <!-- 顶部导航 -->
+    <header>
+        <nav class="main-nav">
+            <div class="container">
+                <div>
+                    <a href="index.html"><i class="fa-solid fa-house"></i></a>
+                </div>
+                <div class="search-bar">
+                    <input id="searchContent" type="text" placeholder="搜索书籍...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <a href="login.html" id="login-button">登录</a>
+                <div id="personalDiv" class="personal">
+                    <div id="dropdownDiv" class="dropdown-button">
+                        <div id="account" class="account-text"></div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <ul id="menuDiv" class="menu-items">
+                            <li><a href="book-upload.html">上架入口</a></li>
+                            <li><a href="my-borrow.html">我的借阅</a></li>
+                            <li><a href="javascript:void(0);" id="layout-button">退出登录</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- 主内容区 -->
+    <main>
+        <div id="categories" class="categories"></div>
+
+        <!-- 内容区布局 -->
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="content-layout">
+                    <!-- 中间书籍列表 -->
+                    <section class="books-container">
+                        <h2><span id="all-books">全部</span>图书</h2>
+                        <div class="books-grid">
+                            <!-- 书籍卡片区域将通过JS动态加载 -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- 分页 -->
+    <div id="pagination" class="pagination">
+    </div>
+    <!-- 底部信息 -->
+    <footer>
+        <div class="footer-content">
+            <div class="container">
+                <div class="footer-sections">
+                    <div class="footer-section">
+                        <h4>关于我们</h4>
+                        <p>企业共享图书网站致力于实现图书资源的高效流通与合理配置。</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>联系我们</h4>
+                        <p>学号：6430522</p>
+                        <p>姓名：陆 伟</p>
+                        <p>邮箱：wl445@nau.edu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2025 共享图书网站 | 版权所有</p>
+            </div>
+        </div>
+    </footer>
+</div>
+<script type="module" src="pages/index.page.js"></script>
+</body>
+</html>

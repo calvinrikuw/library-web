@@ -1,0 +1,150 @@
+/* Toast消息提示 */
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 3px;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.toast-message.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%); /* 居中 */
+    padding: 8px 20px;
+    border-radius: 4px; /* 圆角 */
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 适中的阴影 */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease; /* 平滑的过渡效果 */
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-50%) translateY(-30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.toast-error {
+    background-color: #fef0f0;
+    color: #f56c6c;
+    border: 1px solid #fde2e2;
+}
+.toast-success {
+    background-color: #f0f9eb;
+    color: #67c23a;
+    border: 1px solid #e1f3d8;
+}
+
+.toast-hide {
+    opacity: 0;
+}
+
+.toast-icon {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.categories .item {
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.categories .item.active {
+    background-color: #e33333;
+    color: white;
+}
+
+/* 分页容器 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+/* 分页项 */
+.pagination li {
+    margin: 0 5px;
+}
+
+/* 分页链接 */
+.pagination a {
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    color: #e33333;
+    border-radius: 4px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+/* 分页链接悬停效果 */
+.pagination a:hover {
+    background-color: #f1f1f1;
+}
+
+/* 禁用状态 */
+.pagination .disabled a {
+    color: #ccc;
+    pointer-events: none;
+    background-color: #e9ecef;
+}
+
+/* 当前页的高亮样式 */
+.pagination .active a {
+    background-color: #e33333;
+    color: white;
+}
