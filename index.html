@@ -18,8 +18,8 @@
                     <a href="index.html"><i class="fa-solid fa-house"></i></a>
                 </div>
                 <div class="search-bar">
-                    <input id="searchContent" type="text" placeholder="搜索书籍...">
-                    <button><i class="fas fa-search"></i></button>
+                    <input id="searchText" type="text" placeholder="搜索书籍...">
+                    <button id="searchButton"><i class="fas fa-search"></i></button>
                 </div>
                 <a href="login.html" id="login-button">登录</a>
                 <div id="personalDiv" class="personal">
@@ -29,7 +29,7 @@
                         <ul id="menuDiv" class="menu-items">
                             <li><a href="book-upload.html">上架入口</a></li>
                             <li><a href="my-borrow.html">我的借阅</a></li>
-                            <li><a href="javascript:void(0);" id="layout-button">退出登录</a></li>
+                            <li><a href="javascript:void(0);" id="logout-button">退出登录</a></li>
                         </ul>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     <!-- 中间书籍列表 -->
                     <section class="books-container">
                         <h2><span id="all-books">全部</span>图书</h2>
-                        <div class="books-grid">
+                        <div id="booksGridDiv" class="books-grid">
                             <!-- 书籍卡片区域将通过JS动态加载 -->
                         </div>
                     </section>
@@ -56,7 +56,7 @@
         </div>
     </main>
     <!-- 分页 -->
-    <div id="pagination" class="pagination">
+    <div id="paginationDiv" class="pagination">
     </div>
     <!-- 底部信息 -->
     <footer>
