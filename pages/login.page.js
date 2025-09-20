@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
             toast('登录成功', 'success');
             // 登录成功后延迟跳转到首页
             setTimeout(() => {
+                const params = new URLSearchParams(window.location.search);
+                const redirectUrl = params.get("redirect")
+                if (redirectUrl) {
+                    window.location.href = redirectUrl
+                    return;
+                }
                 location.href = 'index.html';
             }, 500);
         } catch (err) {

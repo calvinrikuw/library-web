@@ -51,6 +51,17 @@ export async function get(path, params) {
 }
 
 /**
+ * 发送 POST 请求
+ *
+ */
+export async function post(path, params) {
+    let options = {method: 'POST', headers: {'Accept': 'application/json', 'Authorization': getToken() || ''}};
+    const q = params ? '?' + new URLSearchParams(params).toString() : '';
+    const res = await fetch(BACKEND_BASE_URL + path + q, options);
+    return handleResponse(res);
+}
+
+/**
  * 发送 FORM表单 POST 请求
  *
  */

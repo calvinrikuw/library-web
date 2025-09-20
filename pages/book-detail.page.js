@@ -6,7 +6,7 @@ import {
     showConfirmation,
     toast
 } from '../assets/js/util.js';
-import {getBook} from "../assets/js/books.api.js";
+import {borrowBook, getBook} from "../assets/js/books.api.js";
 import {renderDropdownList, renderLoginState} from "./common.page.js";
 import {isUserAuthed} from "../assets/js/auth.js";
 
@@ -71,7 +71,9 @@ async function renderBook() {
         const button = qrySelector("#borrow-button", node);
         button.disabled = !(book.availableCopies > 0);
         button.addEventListener('click', () =>
-            handleBorrow(book, () => renderBook(getQueryParam('id')))
+            handleBorrow(book, () => {
+                window.location.href = "my-borrow.html"
+            })
         );
 
         bookDetail.innerHTML = '';
@@ -92,9 +94,8 @@ function handleBorrow(book, onSuccess) {
         `确定要借阅《${book.title}》吗？`,
         async () => {
             try {
-                //const res = await subscribeBook(book.id);
-                const res = 1;
-                if (res.success) {
+                const res = await borrowBook(book.id);
+                if (res?.code === "OK") {
                     toast("借阅成功", "success");
                     if (onSuccess) onSuccess();
                 } else {
