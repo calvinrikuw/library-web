@@ -348,8 +348,87 @@ input:focus {
 }
 
 @media (max-width: 900px) {
-    .book-detail { flex-direction: column; gap: 20px; padding: 20px; }
-    .bd-cover img { width: auto; height: auto;}
-    .bd-title { font-size: 28px; max-width: none; }
-    .bd-button { width: 100%; }
+    .book-detail {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .bd-cover img {
+        width: auto;
+        height: auto;
+    }
+
+    .bd-title {
+        font-size: 28px;
+        max-width: none;
+    }
+
+    .bd-button {
+        width: 100%;
+    }
+}
+
+/* 我的借阅页 */
+#borrow-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, .08);
+    overflow: hidden;
+    font-size: 15px;
+    color: #374151;
+}
+
+#borrow-table thead {
+    background: #f3f4f6;
+}
+
+#borrow-table th {
+    padding: 14px 18px;
+    font-weight: 600;
+    color: #374151;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+    /*background: #fff;*/
+}
+
+#borrow-table td {
+    padding: 14px 18px;
+    color: #4b5563;
+    border-bottom: 1px solid #f3f4f6;
+    vertical-align: middle;
+}
+
+/* 鼠标悬停行高亮 */
+#borrow-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+/* 封面图 */
+#borrow-table img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.status-chip {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+#borrow-table td.borrowing .status-chip {
+    color: #e53935;
+    background: #fee2e2;
+}
+
+#borrow-table td.returned .status-chip {
+    color: #10b981;
+    background: #d1fae5;
 }

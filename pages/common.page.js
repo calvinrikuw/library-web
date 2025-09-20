@@ -8,7 +8,7 @@ import {currentUserName, isUserAuthed, logout} from "../assets/js/auth.js";
 export function renderDropdownList() {
     const dropdownButton = qrySelector('#dropdownDiv');
     dropdownButton.addEventListener('click', (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         dropdownButton.classList.toggle('active');
     });
     const menu = qrySelector('#menuDiv');
