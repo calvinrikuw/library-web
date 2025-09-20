@@ -1,7 +1,123 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>书籍详情</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+<div class="app-container">
+    <!-- 顶部导航 -->
+    <header>
+        <nav class="main-nav">
+            <div class="container">
+                <div>
+                    <a href="index.html"><i class="fa-solid fa-house"></i></a>
+                </div>
+                <div class="search-bar">
+                    <input id="searchText" type="text" placeholder="搜索书籍..." autocomplete="off">
+                    <button id="searchButton"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="login.html" id="login-button">登录</a>
+                <div id="personalDiv" class="personal">
+                    <div id="dropdownDiv" class="dropdown-button">
+                        <div id="account" class="account-text"></div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <ul id="menuDiv" class="menu-items">
+                            <li><a href="book-upload.html">上架入口</a></li>
+                            <li><a href="my-borrow.html">我的借阅</a></li>
+                            <li><a href="javascript:void(0);" id="logout-button">退出登录</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- 主内容区 -->
+    <main class="container">
+        <div class="content-wrapper">
+            <section class="books-container">
+                <h2><span id="all-books">书籍详细信息</span></h2>
+            </section>
+            <template id="book-template">
+                <div class="book-detail-page">
+                    <div class="book-detail">
+                        <div class="bd-cover">
+                            <img id="book-image" src="" alt="">
+                        </div>
+
+                        <div class="bd-info">
+                            <h1 id="book-title" class="bd-title"></h1>
+
+                            <div class="bd-table">
+                                <div class="bd-row">
+                                    <span class="bd-label">作者</span>
+                                    <span id="book-author" class="bd-text bd-author"></span>
+                                </div>
+                                <div class="bd-row">
+                                    <span class="bd-label">出版社</span>
+                                    <span id="book-publisher" class="bd-text"></span>
+                                </div>
+                                <div class="bd-row">
+                                    <span class="bd-label">ISBN</span>
+                                    <span id="book-isbn" class="bd-isbn"></span>
+                                </div>
+                                <div class="bd-row">
+                                    <span class="bd-label">现有库存</span>
+                                    <span id="book-stock" class="bd-stock"></span>
+                                </div>
+
+
+                            </div>
+                            <p id="book-summary" class="bd-summary"></p>
+                            <div class="bd-ops">
+                                <button id="borrow-button" class="bd-button">借阅</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <div id="bookDetailDiv"></div>
+        </div>
+        <div id="confirmationModal" class="modal-overlay">
+            <div class="modal-content">
+                <h3 class="modal-title">提示</h3>
+                <p class="modal-message"></p>
+                <div class="modal-actions">
+                    <button id="confirmBtn" class="btn btn-confirm">确认</button>
+                    <button id="cancelBtn" class="btn btn-cancel">取消</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- 底部信息 -->
+    <footer>
+        <div class="footer-content">
+            <div class="container">
+                <div class="footer-sections">
+                    <div class="footer-section">
+                        <h4>关于我们</h4>
+                        <p>企业共享图书网站致力于实现图书资源的高效流通与合理配置。</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>联系我们</h4>
+                        <p>学号：6430522</p>
+                        <p>姓名：陆 伟</p>
+                        <p>邮箱：wl445@nau.edu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2025 共享图书网站 | 版权所有</p>
+            </div>
+        </div>
+    </footer>
+</div>
+<script type="module" src="pages/book-detail.page.js"></script>
 </body>
 </html>

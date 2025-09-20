@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>企业共享书店-欢迎登录</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="assets/css/components.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -16,15 +16,14 @@
             <label for="accountOrEmail">企业邮箱/用户名</label>
             <i class="fa-solid fa-user"></i>
         </div>
-        <input class="login-input" type="text" id="accountOrEmail" name="accountOrEmail" placeholder="请输入企业邮箱或用户名">
+        <input type="text" id="accountOrEmail" name="accountOrEmail" placeholder="请输入企业邮箱或用户名" autocomplete="off">
 
         <div class="label-box">
             <label for="password">密码</label>
             <i class="fa-solid fa-lock"></i>
         </div>
-        <input class="login-input" type="password" id="password" name="password" placeholder="请输入密码">
-
-        <button class="login-button" type="submit">登录</button>
+        <input type="password" id="password" name="password" placeholder="请输入密码">
+        <button id="login-button" type="submit">登录</button>
     </form>
 </div>
 <script type="module" src="pages/login.page.js"></script>

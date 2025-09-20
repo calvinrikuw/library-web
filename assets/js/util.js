@@ -1,9 +1,68 @@
+import {BACKEND_BASE_URL} from "./config.js";
+
 /**
  * 查询返回指定的页面元素
  *
  */
 export function qrySelector(sel, root = document) {
     return root.querySelector(sel);
+}
+
+/**
+ * 返回 URL 参数
+ *
+ */
+export function getQueryParam(name) {
+    const url = new URL(window.location.href);
+    return url.searchParams.get(name);
+}
+
+/**
+ * 返回静态资源地址
+ *
+ */
+export function handleImageUrl(url) {
+    if (!url) return url;
+    if (url.startsWith('http')) return url;
+    if (url.startsWith('/static')) return BACKEND_BASE_URL + url;
+    return BACKEND_BASE_URL + '/static' + url;
+}
+
+/**
+ * 重定向至登录页
+ *
+ */
+export function redirect2Login(redirectUrl) {
+    let url = 'login.html';
+    if (redirectUrl) url += '?redirect=' + redirectUrl;
+    window.location.href = url;
+}
+
+/**
+ * 模态确认对话框
+ *
+ */
+export function showConfirmation(message, onConfirm, onCancel) {
+    const modal = qrySelector("#confirmationModal");
+    const messageBox = modal.querySelector(".modal-message");
+    const confirmBtn = qrySelector("#confirmBtn");
+    const cancelBtn = qrySelector("#cancelBtn");
+
+    messageBox.textContent = message || "你确定要执行该操作吗？";
+    modal.style.display = "flex";
+
+    confirmBtn.onclick = null;
+    cancelBtn.onclick = null;
+
+    confirmBtn.onclick = () => {
+        modal.style.display = "none";
+        if (onConfirm) onConfirm();
+    };
+    // 点击遮罩层关闭
+    cancelBtn.onclick = () => {
+        modal.style.display = "none";
+        if (onCancel) onCancel();
+    };
 }
 
 /**

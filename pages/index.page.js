@@ -1,7 +1,6 @@
-import {qrySelector} from '../assets/js/util.js';
-import {clearAuth, getToken, getUserName} from "../assets/js/storage.js";
+import {getQueryParam, handleImageUrl, qrySelector} from '../assets/js/util.js';
 import {listBooks} from "../assets/js/books.api.js";
-import {BACKEND_BASE_URL} from "../assets/js/config.js";
+import {renderDropdownList, renderLoginState} from "./common.page.js";
 
 // 定义全局分页查询的状态
 const state = {category: undefined, keywords: undefined, page: 1, size: 12};
@@ -11,8 +10,14 @@ const state = {category: undefined, keywords: undefined, page: 1, size: 12};
  *
  */
 function addSearchListener() {
+    const keywords = getQueryParam('q');
     const searchText = qrySelector('#searchText');
     const searchButton = qrySelector('#searchButton');
+
+    if (keywords) {
+        state.keywords = keywords;
+        searchText.value = keywords;
+    }
 
     // 搜索输入框回车事件
     searchText.addEventListener('keypress', (e) => {
@@ -27,51 +32,6 @@ function addSearchListener() {
         e.preventDefault();
         state.keywords = searchText.value.trim();
         handleRenderBooks();
-    });
-}
-
-/**
- * 渲染导用户登录区域
- *
- */
-function renderLoginState() {
-    const loginButton = qrySelector('#login-button');
-    const personalDiv = qrySelector('#personalDiv');
-    const account = qrySelector('#account');
-
-    if (getToken()) {
-        loginButton.style.display = 'none';
-        personalDiv.style.display = 'block';
-        account.innerText = getUserName();
-    } else {
-        loginButton.style.display = 'block';
-        personalDiv.style.display = 'none';
-    }
-}
-
-/**
- * 渲染用户登录区域下拉菜单
- *
- */
-function renderDropdownList() {
-    const dropdownButton = qrySelector('#dropdownDiv');
-    dropdownButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        dropdownButton.classList.toggle('active');
-    });
-    const menu = qrySelector('#menuDiv');
-    // 点击页面其他地方时隐藏菜单
-    document.addEventListener('click', (e) => {
-        if (!dropdownButton.contains(e.target) && !menu.contains(e.target)) {
-            dropdownButton.classList.remove('active');
-        }
-    });
-    const logoutButton = qrySelector('#logout-button')
-    logoutButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        clearAuth();
-        //刷新页面
-        location.reload();
     });
 }
 
@@ -122,8 +82,7 @@ function renderBooks(booksGrid, books) {
         <a href="book-detail.html?id=${encodeURIComponent(book.id)}"><img src="${handleImageUrl(book.coverUrl)}" alt="${book.title}"></a>
         <a href="book-detail.html?id=${encodeURIComponent(book.id)}"><h3>${book.title}</h3></a>
         <div class="author">${book.author}</div>
-        <p>${book.summary}</p>
-      `;
+        <p>${book.summary}</p>`;
         booksGrid.appendChild(bookCard);
     });
 }
@@ -155,13 +114,6 @@ async function renderBooksPage() {
     } catch (err) {
         booksGrid.innerHTML = `<p class="no-results">${err?.message || '加载失败'}</p>`;
     }
-}
-
-function handleImageUrl(url) {
-    if (!url) return url;
-    if (url.startsWith('http')) return url;
-    if (url.startsWith('/static')) return BACKEND_BASE_URL + url;
-    return BACKEND_BASE_URL + '/static' + url;
 }
 
 /**
@@ -258,8 +210,8 @@ function handleRenderBooks() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    addSearchListener();
     renderLoginState();
+    addSearchListener();
     renderDropdownList();
     renderCategories();
     handleRenderBooks();
