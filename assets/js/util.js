@@ -1,5 +1,8 @@
 import {BACKEND_BASE_URL} from "./config.js";
 
+// 提交中的标志位
+let isSubmitting = false;
+
 /**
  * 查询返回指定的页面元素
  *
@@ -97,4 +100,30 @@ export function toast(message, type = 'success') {
     setTimeout(() => toast.classList.add('toast-hide'), 3000);
     // 移除提示框
     setTimeout(() => document.body.removeChild(toast), 3000);
+}
+
+/**
+ * 用于禁用表单的元素，防止重复提交
+ *
+ */
+export function setSubmittingState(target, submitting) {
+    isSubmitting = submitting;
+
+    if (!target) return;
+    if (target.tagName === "FORM") {
+        // 禁用表单下的所有元素
+        target.querySelectorAll("input, textarea, button").forEach(el => {
+            el.disabled = submitting;
+        });
+    } else {
+        target.disabled = submitting;
+    }
+}
+
+/**
+ * 返回是否提交中的状态
+ *
+ */
+export function getSubmittingState() {
+    return isSubmitting;
 }

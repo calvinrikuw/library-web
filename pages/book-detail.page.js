@@ -1,8 +1,8 @@
 import {
-    getQueryParam,
+    getQueryParam, getSubmittingState,
     handleImageUrl,
     qrySelector,
-    redirect2Login,
+    redirect2Login, setSubmittingState,
     showConfirmation,
     toast
 } from '../assets/js/util.js';
@@ -92,10 +92,18 @@ function handleBorrow(book, onSuccess) {
         redirect2Login(redirectUrl);
         return;
     }
+
+    const button = qrySelector("#borrow-button");
+
+    // 避免重复提交
+    if (getSubmittingState()) return;
+
     showConfirmation(
         `确定要借阅《${book.title}》吗？`,
         async () => {
             try {
+                setSubmittingState(button, true);
+
                 const res = await borrowBook(book.id);
                 if (res?.code === "OK") {
                     toast("借阅成功", "success");

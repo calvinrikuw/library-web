@@ -1,10 +1,14 @@
 import {renderDropdownList, renderLoginState} from "./common.page.js";
-import {qrySelector, redirect2Login, showConfirmation, toast} from "../assets/js/util.js";
+import {
+    getSubmittingState,
+    qrySelector,
+    redirect2Login,
+    setSubmittingState,
+    showConfirmation,
+    toast
+} from "../assets/js/util.js";
 import {uploadBook} from "../assets/js/books.api.js";
 import {isUserAuthed} from "../assets/js/auth.js";
-
-// 提交中的标志位
-let isSubmitting = false;
 
 /**
  * 实现图片的上传预览
@@ -73,15 +77,6 @@ function checkFormData(title, author, publisher, isbn, category, summary, coverF
     return true;
 }
 
-function setSubmittingState(form, submitting) {
-    isSubmitting = submitting;
-
-    // 禁用所有可交互元素
-    form.querySelectorAll('input, textarea, button').forEach(el => {
-        if (form.contains(el)) el.disabled = submitting;
-    });
-}
-
 /**
  * 书籍上传表单处理
  *
@@ -95,7 +90,7 @@ function handleSubmitForm(onSuccess) {
 
     const form = qrySelector("#bookForm");
     // 避免重复提交
-    if (isSubmitting) return;
+    if (getSubmittingState()) return;
 
     const title = qrySelector("#title").value.trim();
     const author = qrySelector("#author").value.trim();
@@ -134,8 +129,6 @@ function handleSubmitForm(onSuccess) {
                 }
             } catch (err) {
                 toast(err?.message || "上传失败", "error");
-            } finally {
-                setSubmittingState(form, false);
             }
         },
         () => {
