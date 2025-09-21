@@ -1,7 +1,138 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的借阅</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+<div class="mb-container">
+    <!-- 顶部导航 -->
+    <header>
+        <nav class="main-nav">
+            <div class="container">
+                <div>
+                    <a href="index.html"><i class="fa-solid fa-house"></i><span>首页</span></a>
+                </div>
+                <a href="login.html" id="login-button">登录</a>
+                <div id="personalDiv" class="personal">
+                    <div id="dropdownDiv" class="dropdown-button">
+                        <div id="account" class="account-text"></div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <ul id="menuDiv" class="menu-items">
+                            <li><a href="book-upload.html">上架入口</a></li>
+                            <li><a href="my-borrow.html">我的借阅</a></li>
+                            <li><a href="javascript:void(0);" id="logout-button">退出登录</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- 主内容区 -->
+    <main class="container">
+        <div class="content-wrapper">
+            <section class="books-container">
+                <h2 class="section-title"><span id="all-books">书籍上传</span></h2>
+                <form id="bookForm">
+                    <div class="form-row">
+                        <label for="title" class="form-label">书名</label>
+                        <input type="text" id="title" name="title" class="form-input" placeholder="请输入书名"
+                               autocomplete="off">
+                    </div>
+                    <div class="form-row">
+                        <label for="author" class="form-label">作者</label>
+                        <input type="text" id="author" name="author" class="form-input" placeholder="请输入作者姓名"
+                               autocomplete="off">
+                    </div>
+                    <div class="form-row">
+                        <label for="publisher" class="form-label">出版社</label>
+                        <input type="text" id="publisher" name="publisher" class="form-input"
+                               placeholder="请输入出版社名称" autocomplete="off">
+                    </div>
+                    <div class="form-row">
+                        <label for="isbn" class="form-label">ISBN</label>
+                        <input type="text" id="isbn" name="isbn" class="form-input" placeholder="请输入书本的ISBN"
+                               autocomplete="off">
+                    </div>
+                    <div class="form-row">
+                        <span class="form-label">分类</span>
+                        <div class="form-checkbox-group">
+                            <label class="tag">
+                                <input type="radio" name="category" value="tech">
+                                <span>技术类</span>
+                            </label>
+                            <label class="tag">
+                                <input type="radio" name="category" value="mgt">
+                                <span>管理类</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="summary" class="form-label">内容简介</label>
+                        <textarea id="summary" name="summary" class="form-textarea" rows="5"
+                                  placeholder="请输入图书内容简介（最多200字）" maxlength="200"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="coverImage" class="form-label">封面图片</label>
+                        <div class="upload-container">
+                            <label for="coverImage" class="preview-container">
+                                <svg id="placeholder" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="0" y1="100" x2="200" y2="100" stroke="#ccc" stroke-width="2"/>
+                                    <line x1="100" y1="0" x2="100" y2="200" stroke="#ccc" stroke-width="2"/>
+                                </svg>
+                                <img src="" alt="预览封面图片" id="preview-image" style="display:none;">
+                            </label>
+                            <input type="file" id="coverImage" name="cover"
+                                   class="form-upload-input" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="form-actions form-row">
+                        <button type="submit" class="form-button">提交</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <div id="confirmationModal" class="modal-overlay">
+            <div class="modal-content">
+                <h3 class="modal-title">提示</h3>
+                <p class="modal-message"></p>
+                <div class="modal-actions">
+                    <button id="confirmBtn" class="btn btn-confirm">确认</button>
+                    <button id="cancelBtn" class="btn btn-cancel">取消</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- 底部信息 -->
+    <footer>
+        <div class="footer-content">
+            <div class="container">
+                <div class="footer-sections">
+                    <div class="footer-section">
+                        <h4>关于我们</h4>
+                        <p>企业共享图书网站致力于实现图书资源的高效流通与合理配置。</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>联系我们</h4>
+                        <p>学号：6430522</p>
+                        <p>姓名：陆 伟</p>
+                        <p>邮箱：wl445@nau.edu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2025 共享图书网站 | 版权所有</p>
+            </div>
+        </div>
+    </footer>
+</div>
+<script type="module" src="pages/my-borrow.page.js"></script>
 </body>
 </html>

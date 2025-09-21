@@ -64,7 +64,7 @@ header {
     color: white;
     font-size: 16px;
     font-weight: 600;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
     margin-top: 40px;
 }
@@ -184,7 +184,7 @@ input:focus {
     border: none;
     background-color: #e33333;
     color: white;
-    border-radius: 3px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.2s;
@@ -304,26 +304,27 @@ input:focus {
     font-size: 15px;
     color: #666;
     line-height: 1.8;
-    white-space: pre-line;
     flex: 1;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .bd-ops {
     display: flex;
-    align-items: center;
     justify-content: flex-end;
-    gap: 16px;
+    margin-top: auto;
 }
 
 .bd-button {
-    width: 30%;
+    width: 120px;
     padding: 10px;
     border: none;
     background-color: #e33333;
     color: white;
     font-size: 16px;
     font-weight: 600;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
     margin-top: 40px;
 }
@@ -391,7 +392,6 @@ input:focus {
     color: #374151;
     text-align: center;
     border-bottom: 1px solid #e5e7eb;
-    /*background: #fff;*/
 }
 
 #borrow-table td {
@@ -431,4 +431,190 @@ input:focus {
 #borrow-table td.returned .status-chip {
     color: #10b981;
     background: #d1fae5;
+}
+
+/* 书籍上传页 */
+#bookForm {
+    max-width: 780px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, .06);
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 16px 16px;
+    margin: 0 auto;
+}
+
+/* 控制控件占一行 */
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+    grid-column: 1 / -1;
+}
+
+.form-label {
+    width: 120px;
+    text-align: right;
+    font-weight: 600;
+    color: #374151;
+    flex-shrink: 0;
+    padding-right: 12px;
+}
+
+.form-input {
+    flex: 1;
+    width: 100%;
+    max-width: 500px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#bookForm .form-textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #111827;
+    background: #fff;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    resize: none;
+    line-height: 1.7;
+}
+
+#bookForm .form-input::placeholder,
+#bookForm .form-textarea::placeholder {
+    color: #9ca3af;
+}
+
+#bookForm .form-input:focus,
+#bookForm .form-textarea:focus {
+    outline: 0;
+    border-color: #e33333;
+    box-shadow: 0 0 0 3px rgba(227, 51, 51, .15);
+    background: #fff;
+}
+
+.section-title {
+    margin: 0 auto 14px auto;
+    max-width: 780px;
+    padding-left: 24px;
+    font-size: 18px;
+    font-weight: 700;
+    position: relative;
+}
+
+/* 书籍分类 */
+.form-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.form-checkbox-group label.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    background: #f9fafb;
+    color: #374151;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    transition: all .15s ease;
+}
+
+.form-checkbox-group input[type="radio"] {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #cbd5e1;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.form-checkbox-group input[type="radio"]:checked {
+    background: #e53935;
+    border-color: #e53935;
+}
+
+.form-checkbox-group input[type="radio"]:checked + span {
+    color: #e53935;
+    font-weight: 600;
+}
+
+.form-checkbox-group label.tag:has(input[type="radio"]:checked) {
+    border-color: #e53935;
+    background: #fee2e2;
+    color: #e53935;
+}
+
+.upload-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.preview-container {
+    width: 200px;
+    height: 200px;
+    border: 1px dashed #d1d5db;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+    cursor: pointer;
+    transition: border-color .15s ease, background .15s ease;
+}
+
+.preview-container:hover {
+    border-color: #e33333;
+    background: #fff;
+}
+
+#preview-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+}
+
+.form-upload-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+
+.form-button {
+    padding: 12px 24px;
+    border: none;
+    background-color: #e33333;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-right: 40px;
+    width: 120px;
 }

@@ -15,7 +15,7 @@
         <nav class="main-nav">
             <div class="container">
                 <div>
-                    <a href="index.html"><i class="fa-solid fa-house"></i></a>
+                    <a href="index.html"><i class="fa-solid fa-house"></i><span>首页</span></a>
                 </div>
                 <div class="search-bar">
                     <input id="searchText" type="text" placeholder="搜索书籍..." autocomplete="off">
@@ -41,46 +41,45 @@
         <div class="content-wrapper">
             <section class="books-container">
                 <h2><span id="all-books">书籍详细信息</span></h2>
-            </section>
-            <template id="book-template">
-                <div class="book-detail-page">
-                    <div class="book-detail">
-                        <div class="bd-cover">
-                            <img id="book-image" src="" alt="">
-                        </div>
-
-                        <div class="bd-info">
-                            <h1 id="book-title" class="bd-title"></h1>
-
-                            <div class="bd-table">
-                                <div class="bd-row">
-                                    <span class="bd-label">作者</span>
-                                    <span id="book-author" class="bd-text bd-author"></span>
-                                </div>
-                                <div class="bd-row">
-                                    <span class="bd-label">出版社</span>
-                                    <span id="book-publisher" class="bd-text"></span>
-                                </div>
-                                <div class="bd-row">
-                                    <span class="bd-label">ISBN</span>
-                                    <span id="book-isbn" class="bd-isbn"></span>
-                                </div>
-                                <div class="bd-row">
-                                    <span class="bd-label">现有库存</span>
-                                    <span id="book-stock" class="bd-stock"></span>
-                                </div>
-
-
+                <template id="book-template">
+                    <div class="book-detail-page">
+                        <div class="book-detail">
+                            <div class="bd-cover">
+                                <img id="book-image" src="" alt="">
                             </div>
-                            <p id="book-summary" class="bd-summary"></p>
-                            <div class="bd-ops">
-                                <button id="borrow-button" class="bd-button">借阅</button>
+                            <div class="bd-info">
+                                <h1 id="book-title" class="bd-title"></h1>
+                                <div class="bd-table">
+                                    <div class="bd-row">
+                                        <span class="bd-label">作者</span>
+                                        <span id="book-author" class="bd-text bd-author"></span>
+                                    </div>
+                                    <div class="bd-row">
+                                        <span class="bd-label">出版社</span>
+                                        <span id="book-publisher" class="bd-text"></span>
+                                    </div>
+                                    <div class="bd-row">
+                                        <span class="bd-label">ISBN</span>
+                                        <span id="book-isbn" class="bd-isbn"></span>
+                                    </div>
+                                    <div class="bd-row">
+                                        <span class="bd-label">内容简介</span>
+                                        <span id="book-summary" class="bd-text"></span>
+                                    </div>
+                                    <div class="bd-row">
+                                        <span class="bd-label">现有库存</span>
+                                        <span id="book-stock" class="bd-stock"></span>
+                                    </div>
+                                </div>
+                                <div class="bd-ops">
+                                    <button id="borrow-button" class="bd-button">借阅</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </template>
-            <div id="bookDetailDiv"></div>
+                </template>
+                <div id="bookDetailDiv"></div>
+            </section>
         </div>
         <div id="confirmationModal" class="modal-overlay">
             <div class="modal-content">

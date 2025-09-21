@@ -15,7 +15,7 @@
         <nav class="main-nav">
             <div class="container">
                 <div>
-                    <a href="index.html"><i class="fa-solid fa-house"></i></a>
+                    <a href="index.html"><i class="fa-solid fa-house"></i><span>首页</span></a>
                 </div>
                 <a href="login.html" id="login-button">登录</a>
                 <div id="personalDiv" class="personal">
@@ -35,24 +35,24 @@
     <main class="container">
         <div class="content-wrapper">
             <section class="books-container">
-                <h2><span id="all-books">书籍详细信息</span></h2>
+                <h2><span id="all-books">书籍借阅信息</span></h2>
+                <table id="borrow-table">
+                    <thead>
+                    <tr>
+                        <th>封面</th>
+                        <th>书名</th>
+                        <th>借阅日期</th>
+                        <th>当前状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="5">无信息</td>
+                    </tr>
+                    </tbody>
+                </table>
             </section>
-            <table id="borrow-table">
-                <thead>
-                <tr>
-                    <th>封面</th>
-                    <th>书名</th>
-                    <th>借阅日期</th>
-                    <th>当前状态</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td colspan="5">无信息</td>
-                </tr>
-                </tbody>
-            </table>
         </div>
         <div id="confirmationModal" class="modal-overlay">
             <div class="modal-content">
