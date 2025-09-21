@@ -72,7 +72,9 @@ async function renderBook() {
         button.disabled = !(book.availableCopies > 0);
         button.addEventListener('click', () =>
             handleBorrow(book, () => {
-                window.location.href = "my-borrow.html"
+                setTimeout(() => {
+                    window.location.href = "my-borrow.html"
+                }, 2000);
             })
         );
 

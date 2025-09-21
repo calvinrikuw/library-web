@@ -33,7 +33,10 @@ async function renderTable() {
         const returnBtn = tr.querySelector('button');
         returnBtn.addEventListener('click', () => {
             handleReturn(book, () => {
-                renderTable();
+                setTimeout(() => {
+                    renderTable();
+                }, 1000);
+
             })
         });
     })

@@ -41,22 +41,22 @@
                     <div class="form-row">
                         <label for="title" class="form-label">书名</label>
                         <input type="text" id="title" name="title" class="form-input" placeholder="请输入书名"
-                               autocomplete="off">
+                               autocomplete="off" maxlength="100">
                     </div>
                     <div class="form-row">
                         <label for="author" class="form-label">作者</label>
                         <input type="text" id="author" name="author" class="form-input" placeholder="请输入作者姓名"
-                               autocomplete="off">
+                               autocomplete="off" maxlength="80">
                     </div>
                     <div class="form-row">
                         <label for="publisher" class="form-label">出版社</label>
                         <input type="text" id="publisher" name="publisher" class="form-input"
-                               placeholder="请输入出版社名称" autocomplete="off">
+                               placeholder="请输入出版社名称" autocomplete="off" maxlength="30">
                     </div>
                     <div class="form-row">
                         <label for="isbn" class="form-label">ISBN</label>
                         <input type="text" id="isbn" name="isbn" class="form-input" placeholder="请输入书本的ISBN"
-                               autocomplete="off">
+                               autocomplete="off" maxlength="13" oninput="this.value = this.value.replace(/\D/g, '')">
                     </div>
                     <div class="form-row">
                         <span class="form-label">分类</span>
@@ -88,11 +88,11 @@
                                 <img src="" alt="预览封面图片" id="preview-image" style="display:none;">
                             </label>
                             <input type="file" id="coverImage" name="cover"
-                                   class="form-upload-input" accept="image/*">
+                                   class="form-upload-input" accept=".jpg,.jpeg">
                         </div>
                     </div>
                     <div class="form-actions form-row">
-                        <button type="submit" class="form-button">提交</button>
+                        <button id="form-button" type="submit" class="form-button">提交</button>
                     </div>
                 </form>
             </section>
@@ -133,6 +133,6 @@
         </div>
     </footer>
 </div>
-<script type="module" src="pages/my-borrow.page.js"></script>
+<script type="module" src="pages/book-upload.page.js"></script>
 </body>
 </html>

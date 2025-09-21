@@ -18,6 +18,19 @@ async function handleResponse(res) {
     return data?.data ?? data;
 }
 
+async function handleFormResponse(res) {
+    // 权限/认证相关的错误码
+    if (res.status === 401 || res.status === 403) {
+        clearAuth();
+        throw new Error('会话过期请重新登录');
+    }
+    const data = await res.json().catch(() => null);
+    if (!res.ok || data?.code === "ERROR") {
+        throw new Error(data?.message || res.statusText);
+    }
+    return data;
+}
+
 /**
  * 发送 JSON POST 请求
  *
@@ -74,5 +87,5 @@ export async function postForm(path, formDataOrParams, isMultipart = false) {
         options.body = new URLSearchParams(formDataOrParams);
     }
     const res = await fetch(BACKEND_BASE_URL + path, options);
-    return handleResponse(res);
+    return handleFormResponse(res);
 }

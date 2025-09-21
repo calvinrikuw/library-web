@@ -239,6 +239,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     min-width: 0;
+    max-width: 500px;
 }
 
 .bd-title {
@@ -247,6 +248,9 @@ input:focus {
     font-weight: 600;
     color: #0f172a;
     margin: 4px 0 18px;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
 }
 
 .bd-table {
@@ -617,4 +621,10 @@ input:focus {
     margin-bottom: 10px;
     margin-right: 40px;
     width: 120px;
+}
+
+#form-button:disabled,
+.form-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
