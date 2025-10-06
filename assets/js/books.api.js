@@ -1,4 +1,4 @@
-import {get, post, postForm} from './http.js';
+import {get, getBlob, post, postForm} from './http.js';
 
 export function listBooks({c = '', q = '', page = 1, size = 10} = {}) {
     return get('/api/books', {c, q, page, size});
@@ -22,4 +22,17 @@ export function myLoans() {
 
 export function uploadBook(formData) {
     return postForm('/api/books/upload', formData, true);
+}
+
+export async function exportMyLoans() {
+    const {blob, filename} = await getBlob('/api/loans/export', 'my_loans.csv');
+
+    const a = document.createElement('a');
+    const href = URL.createObjectURL(blob);
+    a.href = href;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(href);
 }

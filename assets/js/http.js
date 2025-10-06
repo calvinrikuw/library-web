@@ -89,3 +89,25 @@ export async function postForm(path, formDataOrParams, isMultipart = false) {
     const res = await fetch(BACKEND_BASE_URL + path, options);
     return handleFormResponse(res);
 }
+
+/**
+ * 以 GET 方式获取二进制文件
+ *
+ */
+export async function getBlob(path, filename) {
+    let options = {method: 'GET', headers: {'Authorization': getToken() || ''}};
+    const res = await fetch(BACKEND_BASE_URL + path, options);
+
+    // 权限/认证相关的错误码
+    if (res.status === 401 || res.status === 403) {
+        clearAuth();
+        throw new Error('会话过期请重新登录');
+    }
+
+    if (!res.ok) {
+        throw new Error(`请求失败 (HTTP ${res.status})`);
+    }
+
+    const blob = await res.blob();
+    return {blob, filename};
+}

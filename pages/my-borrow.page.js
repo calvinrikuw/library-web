@@ -1,7 +1,7 @@
 import {renderDropdownList, renderLoginState} from "./common.page.js";
 import {handleImageUrl, qrySelector, redirect2Login, showConfirmation, toast} from "../assets/js/util.js";
 import {isUserAuthed} from "../assets/js/auth.js";
-import {myLoans, returnBook} from "../assets/js/books.api.js";
+import {exportMyLoans, myLoans, returnBook} from "../assets/js/books.api.js";
 
 
 async function renderTable() {
@@ -73,4 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderLoginState();
     renderDropdownList();
     renderTable();
+
+    const exportBtn = qrySelector('#exportBtn');
+    exportBtn.addEventListener('click', exportMyLoans);
+
 });

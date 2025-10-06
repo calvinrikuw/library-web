@@ -628,3 +628,15 @@ input:focus {
     background-color: #ccc;
     cursor: not-allowed;
 }
+
+.export-button {
+    padding: 12px 24px;
+    border: none;
+    background-color: #e33333;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 120px;
+}
