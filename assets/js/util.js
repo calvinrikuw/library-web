@@ -127,3 +127,36 @@ export function setSubmittingState(target, submitting) {
 export function getSubmittingState() {
     return isSubmitting;
 }
+
+/**
+ * 支持排序表格初始化
+ *
+ */
+export function initTableSort(tableId) {
+    const table = document.getElementById(tableId);
+    const ths = table.tHead.querySelectorAll('th.sortable');
+    const tbody = table.tBodies[0];
+    ths.forEach(th => {
+        th.onclick = () => {
+            const col = +th.dataset.col || 0;
+            const type = (th.dataset.type || 'text').toLowerCase();
+            const cur = th.dataset.order;
+            const next = cur === 'asc' ? 'desc' : 'asc';
+            ths.forEach(x => x.removeAttribute('data-order'));
+            th.dataset.order = next;
+            const rows = Array.from(tbody.rows);
+            rows.sort((a, b) => {
+                const va = (a.cells[col]?.textContent || '').trim();
+                const vb = (b.cells[col]?.textContent || '').trim();
+                if (type === 'date') {
+                    const da = new Date(va).getTime() || 0;
+                    const db = new Date(vb).getTime() || 0;
+                    return next === 'asc' ? da - db : db - da;
+                }
+                const r = va.localeCompare(vb, 'zh-Hans-CN', {sensitivity: 'base', numeric: true});
+                return next === 'asc' ? r : -r;
+            });
+            tbody.append(...rows);
+        };
+    });
+}

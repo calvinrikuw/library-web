@@ -1,5 +1,12 @@
 import {renderDropdownList, renderLoginState} from "./common.page.js";
-import {handleImageUrl, qrySelector, redirect2Login, showConfirmation, toast} from "../assets/js/util.js";
+import {
+    handleImageUrl,
+    initTableSort,
+    qrySelector,
+    redirect2Login,
+    showConfirmation,
+    toast
+} from "../assets/js/util.js";
 import {isUserAuthed} from "../assets/js/auth.js";
 import {exportMyLoans, myLoans, returnBook} from "../assets/js/books.api.js";
 
@@ -73,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderLoginState();
     renderDropdownList();
     renderTable();
-
+    initTableSort('borrow-table');
     const exportBtn = qrySelector('#exportBtn');
     exportBtn.addEventListener('click', exportMyLoans);
 

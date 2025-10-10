@@ -477,3 +477,29 @@ footer {
         transform: scale(1);
     }
 }
+
+/* ---------- 表头排序样式 ---------- */
+th.sortable {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    padding-right: 16px;
+}
+
+th.sortable::after {
+    content: "↕";
+    position: absolute;
+    right: 6px;
+    color: #999;
+    font-size: 12px;
+}
+
+th.sortable[data-order="asc"]::after {
+    content: "↑";
+    color: #e33333;
+}
+
+th.sortable[data-order="desc"]::after {
+    content: "↓";
+    color: #e33333;
+}
