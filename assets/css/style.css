@@ -730,12 +730,14 @@ input:focus {
 }
 
 #csvFile {
+    width: 400px;
     margin-right: 20px;
     font-size: 18px;
+    font-weight: 500;
     background-color: #fff;
     border: 1px solid #d0d7e2;
     border-radius: 8px;
-    padding: 8px 30px;
+    padding: 6px 20px;
     cursor: pointer;
     transition: all .15s ease;
 }
