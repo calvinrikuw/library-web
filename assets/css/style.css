@@ -318,6 +318,7 @@ input:focus {
     display: flex;
     justify-content: flex-end;
     margin-top: auto;
+    gap: 16px;
 }
 
 .bd-button {
@@ -337,6 +338,33 @@ input:focus {
     background: #cbd5e1;
     box-shadow: none;
     cursor: not-allowed;
+}
+
+.fav-btn {
+    width: 120px;
+    padding: 10px;
+    border: 2px solid #e53935;
+    background: #fff;
+    color: #e53935;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.fav-btn:hover {
+    background: #fff4f4;
+}
+
+.fav-btn[aria-pressed="true"] {
+    background: #e53935;
+    color: #fff;
+    border-color: #e53935;
+}
+
+.fav-btn[aria-pressed="true"]:hover {
+    background: #d32f2f;
 }
 
 .bd-stock {

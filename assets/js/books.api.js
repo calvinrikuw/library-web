@@ -36,3 +36,15 @@ export async function exportMyLoans() {
     a.remove();
     URL.revokeObjectURL(href);
 }
+
+export function addFavorite(bookId) {
+    return post(`/api/books/${bookId}/favorite/add`);
+}
+
+export function removeFavorite(bookId) {
+    return post(`/api/books/${bookId}/favorite/remove`);
+}
+
+export function listFavorites() {
+    return get(`/api/books/favorites`);
+}

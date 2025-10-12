@@ -6,9 +6,11 @@ import {
     showConfirmation,
     toast
 } from '../assets/js/util.js';
-import {borrowBook, getBook} from "../assets/js/books.api.js";
+import {addFavorite, borrowBook, getBook, listFavorites, removeFavorite} from "../assets/js/books.api.js";
 import {renderDropdownList, renderLoginState} from "./common.page.js";
 import {isUserAuthed} from "../assets/js/auth.js";
+
+let myFavorites = new Set();
 
 /**
  * 增加搜索框事件监听
@@ -30,6 +32,62 @@ function addSearchListener() {
         e.preventDefault();
         window.location.href = `index.html?q=${encodeURIComponent(searchText.value.trim())}`;
     });
+}
+
+/**
+ * 获取当前用户的收藏书籍
+ *
+ */
+async function loadFavorites() {
+    if (myFavorites.size > 0) return;
+    try {
+        const res = await listFavorites();
+        const arr = Array.isArray(res) ? res : (Array.isArray(res?.data) ? res.data : []);
+        myFavorites = new Set(arr.map(b => String(b.id)));
+    } catch (e) {
+        myFavorites = new Set();
+    }
+}
+
+function syncFavBtn(btn, favored) {
+    btn.setAttribute('aria-pressed', favored ? 'true' : 'false');
+    const icon = btn.querySelector('i');
+    const text = btn.querySelector('span');
+    if (favored) {
+        icon.classList.remove('fa-regular');
+        icon.classList.add('fa-solid');
+        text.textContent = '已收藏';
+        btn.title = '取消收藏';
+    } else {
+        icon.classList.remove('fa-solid');
+        icon.classList.add('fa-regular');
+        text.textContent = '收藏';
+        btn.title = '收藏';
+    }
+}
+
+async function handleFavorite(bookId, favBtn) {
+    if (!isUserAuthed()) {
+        const redirectUrl = window.location.pathname + window.location.search;
+        redirect2Login(redirectUrl);
+        return;
+    }
+    const next = favBtn.getAttribute('aria-pressed') !== 'true';
+    syncFavBtn(favBtn, next);
+    try {
+        if (next) {
+            await addFavorite(bookId);
+            myFavorites.add(String(bookId));
+            toast("收藏成功", "success");
+        } else {
+            await removeFavorite(bookId);
+            myFavorites.delete(String(bookId));
+            toast("已取消收藏", "success");
+        }
+    } catch (e) {
+        syncFavBtn(favBtn, !next);
+        toast(e?.message || "操作失败", "error");
+    }
 }
 
 /**
@@ -78,6 +136,12 @@ async function renderBook() {
             })
         );
 
+        // 处理书籍收藏
+        const favBtn = qrySelector("#fav-button", node);
+        const favored = myFavorites.has(String(book.id));
+        syncFavBtn(favBtn, favored);
+        favBtn.addEventListener('click', () => handleFavorite(book.id, favBtn));
+
         bookDetail.innerHTML = '';
         bookDetail.appendChild(node);
 
@@ -124,5 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderLoginState();
     addSearchListener();
     renderDropdownList();
+    loadFavorites();
     renderBook();
 });
