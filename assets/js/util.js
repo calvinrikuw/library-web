@@ -25,7 +25,8 @@ export function getQueryParam(name) {
  *
  */
 export function handleImageUrl(url) {
-    if (!url) return url;
+    let defaultImageUrl = '/assets/img/default_cover.jpg';
+    if (!url || !String(url).trim()) return defaultImageUrl;
     if (url.startsWith('http')) return url;
     if (url.startsWith('/static')) return BACKEND_BASE_URL + url;
     return BACKEND_BASE_URL + '/static' + url;

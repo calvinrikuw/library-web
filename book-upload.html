@@ -36,65 +36,96 @@
     <main class="container">
         <div class="content-wrapper">
             <section class="books-container">
-                <h2 class="section-title"><span id="all-books">书籍上传</span></h2>
-                <form id="bookForm">
-                    <div class="form-row">
-                        <label for="title" class="form-label">书名</label>
-                        <input type="text" id="title" name="title" class="form-input" placeholder="请输入书名"
-                               autocomplete="off" maxlength="100">
-                    </div>
-                    <div class="form-row">
-                        <label for="author" class="form-label">作者</label>
-                        <input type="text" id="author" name="author" class="form-input" placeholder="请输入作者姓名"
-                               autocomplete="off" maxlength="80">
-                    </div>
-                    <div class="form-row">
-                        <label for="publisher" class="form-label">出版社</label>
-                        <input type="text" id="publisher" name="publisher" class="form-input"
-                               placeholder="请输入出版社名称" autocomplete="off" maxlength="30">
-                    </div>
-                    <div class="form-row">
-                        <label for="isbn" class="form-label">ISBN</label>
-                        <input type="text" id="isbn" name="isbn" class="form-input" placeholder="请输入书本的ISBN"
-                               autocomplete="off" maxlength="13" oninput="this.value = this.value.replace(/\D/g, '')">
-                    </div>
-                    <div class="form-row">
-                        <span class="form-label">分类</span>
-                        <div class="form-checkbox-group">
-                            <label class="tag">
-                                <input type="radio" name="category" value="tech">
-                                <span>技术类</span>
-                            </label>
-                            <label class="tag">
-                                <input type="radio" name="category" value="mgt">
-                                <span>管理类</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label for="summary" class="form-label">内容简介</label>
-                        <textarea id="summary" name="summary" class="form-textarea" rows="5"
-                                  placeholder="请输入图书内容简介（最多200字）" maxlength="200"></textarea>
+                <!-- Tabs 导航 -->
+                <div class="tabs">
+                    <div class="tabs-nav">
+                        <button class="tab-btn active" data-tab="tab-single">单本上架</button>
+                        <button class="tab-btn" data-tab="tab-batch">批量导入</button>
                     </div>
 
-                    <div class="form-row">
-                        <label for="coverImage" class="form-label">封面图片</label>
-                        <div class="upload-container">
-                            <label for="coverImage" class="preview-container">
-                                <svg id="placeholder" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-                                    <line x1="0" y1="100" x2="200" y2="100" stroke="#ccc" stroke-width="2"/>
-                                    <line x1="100" y1="0" x2="100" y2="200" stroke="#ccc" stroke-width="2"/>
-                                </svg>
-                                <img src="" alt="预览封面图片" id="preview-image" style="display:none;">
-                            </label>
-                            <input type="file" id="coverImage" name="cover"
-                                   class="form-upload-input" accept=".jpg,.jpeg">
-                        </div>
+                    <div class="tabs-panels">
+                        <!-- 单本上架 -->
+                        <section id="tab-single" class="tab-panel active">
+                            <h2 class="section-title"><span id="all-books">书籍上传</span></h2>
+                            <form id="bookForm">
+                                <div class="form-row">
+                                    <label for="title" class="form-label">书名</label>
+                                    <input type="text" id="title" name="title" class="form-input"
+                                           placeholder="请输入书名"
+                                           autocomplete="off" maxlength="100">
+                                </div>
+                                <div class="form-row">
+                                    <label for="author" class="form-label">作者</label>
+                                    <input type="text" id="author" name="author" class="form-input"
+                                           placeholder="请输入作者姓名"
+                                           autocomplete="off" maxlength="80">
+                                </div>
+                                <div class="form-row">
+                                    <label for="publisher" class="form-label">出版社</label>
+                                    <input type="text" id="publisher" name="publisher" class="form-input"
+                                           placeholder="请输入出版社名称" autocomplete="off" maxlength="30">
+                                </div>
+                                <div class="form-row">
+                                    <label for="isbn" class="form-label">ISBN</label>
+                                    <input type="text" id="isbn" name="isbn" class="form-input"
+                                           placeholder="请输入书本的ISBN"
+                                           autocomplete="off" maxlength="13"
+                                           oninput="this.value = this.value.replace(/\D/g, '')">
+                                </div>
+                                <div class="form-row">
+                                    <span class="form-label">分类</span>
+                                    <div class="form-checkbox-group">
+                                        <label class="tag">
+                                            <input type="radio" name="category" value="tech">
+                                            <span>技术类</span>
+                                        </label>
+                                        <label class="tag">
+                                            <input type="radio" name="category" value="mgt">
+                                            <span>管理类</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <label for="summary" class="form-label">内容简介</label>
+                                    <textarea id="summary" name="summary" class="form-textarea" rows="5"
+                                              placeholder="请输入图书内容简介（最多200字）" maxlength="200"></textarea>
+                                </div>
+
+                                <div class="form-row">
+                                    <label for="coverImage" class="form-label">封面图片</label>
+                                    <div class="upload-container">
+                                        <label for="coverImage" class="preview-container">
+                                            <svg id="placeholder" width="200" height="200"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <line x1="0" y1="100" x2="200" y2="100" stroke="#ccc" stroke-width="2"/>
+                                                <line x1="100" y1="0" x2="100" y2="200" stroke="#ccc" stroke-width="2"/>
+                                            </svg>
+                                            <img src="" alt="预览封面图片" id="preview-image" style="display:none;">
+                                        </label>
+                                        <input type="file" id="coverImage" name="cover"
+                                               class="form-upload-input" accept=".jpg,.jpeg">
+                                    </div>
+                                </div>
+                                <div class="form-actions form-row">
+                                    <button id="form-button" type="submit" class="form-button">提交</button>
+                                </div>
+                            </form>
+                        </section>
+
+                        <!-- 批量导入 -->
+                        <section id="tab-batch" class="tab-panel">
+                            <h2 class="section-title"><span id="import-books">批量上传</span></h2>
+                            <div class="tab-batch">
+                                <div class="form-row">
+                                    <div>
+                                        <input type="file" id="csvFile" accept=".csv">
+                                        <button id="csv-upload-btn" type="button" class="form-button">导入</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
-                    <div class="form-actions form-row">
-                        <button id="form-button" type="submit" class="form-button">提交</button>
-                    </div>
-                </form>
+                </div>
             </section>
         </div>
         <div id="confirmationModal" class="modal-overlay">

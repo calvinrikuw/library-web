@@ -7,7 +7,7 @@ import {
     showConfirmation,
     toast
 } from "../assets/js/util.js";
-import {uploadBook} from "../assets/js/books.api.js";
+import {doCsvUpload, uploadBook} from "../assets/js/books.api.js";
 import {isUserAuthed} from "../assets/js/auth.js";
 
 /**
@@ -35,6 +35,48 @@ function addCoverImageListener() {
         img.style.display = 'block';
         if (placeholder) placeholder.style.display = 'none';
     });
+}
+
+function addCsvUploadBtnListener() {
+    const fileInput = qrySelector('#csvFile');
+    const csvUploadBtn = qrySelector('#csv-upload-btn');
+    csvUploadBtn.addEventListener('click', () => handleSubmitCsv(csvUploadBtn, fileInput));
+}
+
+async function handleSubmitCsv(csvUploadBtn, fileInput) {
+    if (!isUserAuthed()) {
+        const redirectUrl = window.location.pathname;
+        redirect2Login(redirectUrl);
+        return;
+    }
+
+    // 避免重复提交
+    if (getSubmittingState()) return;
+
+    const file = fileInput.files && fileInput.files[0];
+    if (!file) {
+        toast('请选择正确的文件', 'error');
+        return;
+    }
+
+    showConfirmation(
+        '确认导入选中的文件？',
+        async () => {
+            // 避免重复提交
+            setSubmittingState(csvUploadBtn, true);
+            try {
+                const res = await doCsvUpload(file);
+                if (res?.code === "OK") {
+                    toast('导入成功', 'success');
+                    setTimeout(() => location.href = 'index.html', 2000);
+                } else {
+                    toast(res.message || '导入失败', 'error');
+                }
+            } catch (err) {
+                toast(err?.message || '导入失败', 'error');
+            }
+        }, () => {
+        });
 }
 
 function addFormListener() {
@@ -136,9 +178,29 @@ function handleSubmitForm(onSuccess) {
     );
 }
 
+function initTabs() {
+    const nav = qrySelector('.tabs-nav');
+
+    const switchTo = (id) => {
+        nav.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === id));
+    };
+
+    nav.addEventListener('click', (e) => {
+        const btn = e.target.closest('.tab-btn');
+        if (!btn) return;
+        switchTo(btn.dataset.tab);
+    });
+
+    // 默认显示第一个 tab
+    switchTo('tab-single');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     renderLoginState();
     renderDropdownList();
     addCoverImageListener();
     addFormListener();
+    initTabs();
+    addCsvUploadBtnListener();
 });

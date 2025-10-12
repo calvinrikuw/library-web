@@ -48,3 +48,9 @@ export function removeFavorite(bookId) {
 export function listFavorites() {
     return get(`/api/books/favorites`);
 }
+
+export async function doCsvUpload(file) {
+    const form = new FormData();
+    form.append('file', file);
+    return postForm('/api/books/import', form, true);
+}
